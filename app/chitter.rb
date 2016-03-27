@@ -26,7 +26,6 @@ class Chitter < Sinatra::Base
   end
 
   get '/home' do
-    current_user
     erb(:home)
   end
 
@@ -82,11 +81,16 @@ class Chitter < Sinatra::Base
     redirect to '/home'
   end
 
+  delete '/chitter/delete' do
+    Post.get(params[:delete_id]).destroy
+    redirect to '/home'
+  end
+
   post '/comments/new' do
     comment = Comment.create(comment: params[:comment],
                              timestamp: Time.now.strftime("%I:%M%p %m/%d/%Y"))
     current_user = User.get(session[:user_id])
-    post = Post.get(params[:id])
+    post = Post.get(params[:comment_id])
     current_user.comments << comment
     current_user.save
     post.comments << comment

@@ -1,6 +1,6 @@
-feature 'Posting a chitter:' do
+feature 'Posting a peep:' do
 
-  scenario 'User can post a chitter when logged in' do
+  scenario 'User can post a peep when logged in' do
     sign_up
     log_in
     expect{ post_peep }.to change(Post, :count).by(1)

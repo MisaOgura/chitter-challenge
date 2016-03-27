@@ -31,5 +31,9 @@ end
 
 def comment
   fill_in('comment', with: 'Test comment')
-  expect{ click_button('Comment') }.to change(Comment, :count).by(1)
+  click_button('Comment')
+end
+
+def delete_peep
+  click_button('Delete this peep')
 end
