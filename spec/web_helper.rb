@@ -29,11 +29,16 @@ def post_peep(message: 'Test post')
   click_button('Peep')
 end
 
+def post_peep2(message: 'Posting number 2')
+  fill_in('message', with: message)
+  click_button('Peep')
+end
+
 def comment
   fill_in('comment', with: 'Test comment')
   click_button('Comment')
 end
 
 def delete_peep
-  click_button('Delete this peep')
+  click_button('delete_4')
 end

@@ -74,15 +74,17 @@ class Chitter < Sinatra::Base
     erb(:'sessions/end')
   end
 
-  post '/chitter/new' do
+  post '/chitters/new' do
     current_user = User.get(session[:user_id])
     current_user.posts.create(message: params[:message],
                               timestamp: Time.now.strftime("%I:%M%p %m/%d/%Y"))
     redirect to '/home'
   end
 
-  delete '/chitter/delete' do
-    Post.get(params[:delete_id]).destroy
+  delete '/chitters/delete' do
+    post = Post.get(params[:delete_id])
+    post.comments.destroy
+    post.destroy
     redirect to '/home'
   end
 
